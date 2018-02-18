@@ -215,4 +215,6 @@ Steps in order to use CP
 
     However you want to access the result from your main thread in order to use them, e.g. display the info in the UI.
 
+## Resourse apart from Udacity's classroom   
+
 https://developer.android.com/guide/topics/providers/content-provider-basics.html#Permissions
