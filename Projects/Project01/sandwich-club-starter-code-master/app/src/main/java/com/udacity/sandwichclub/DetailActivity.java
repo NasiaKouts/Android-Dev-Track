@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
@@ -128,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
         List<String> ingredientsList = sandwich.getIngredients();
         // if there is none available, then we set a text informing the user about the lack of info.
         if(ingredientsList.size() == 0) {
-            ingredientsTextView.setText("not available");
+            ingredientsTextView.setText(getResources().getString(R.string.not_available));
             ingredientsTextView.setTypeface(ingredientsTextView.getTypeface(), Typeface.ITALIC);
         }
         // otherwise we populate the textview with the corresponding info
@@ -154,7 +153,7 @@ public class DetailActivity extends AppCompatActivity {
          */
         String origin = sandwich.getPlaceOfOrigin();
         if(origin.equals("")){
-            originTextView.setText("not available");
+            originTextView.setText(getResources().getString(R.string.not_available));
             originTextView.setTypeface(originTextView.getTypeface(), Typeface.ITALIC);
         }
         else{
@@ -164,7 +163,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String description = sandwich.getDescription();
         if(description.equals("")){
-            descTextView.setText("not available");
+            descTextView.setText(getResources().getString(R.string.not_available));
             descTextView.setTypeface(null, Typeface.ITALIC);
         }
         else{
