@@ -2,7 +2,7 @@ package aueb.gr.nasiakouts.popularmovies.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PopularMoviesResponse {
+public class ExploreMoviesResponse {
 
     @SerializedName("total_pages")
     private int totalResults;
@@ -10,7 +10,7 @@ public class PopularMoviesResponse {
     @SerializedName("results")
     private Movie[] movies;
 
-    public PopularMoviesResponse(int totalResults, Movie[] movies) {
+    public ExploreMoviesResponse(int totalResults, Movie[] movies) {
         this.totalResults = totalResults;
         this.movies = movies;
     }

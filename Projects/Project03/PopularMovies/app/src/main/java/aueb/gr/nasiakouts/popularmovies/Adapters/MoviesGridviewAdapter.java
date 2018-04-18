@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -33,11 +34,13 @@ public class MoviesGridviewAdapter extends ArrayAdapter<Movie> {
 
     private final GridView movieGridView;
     private final FrameLayout gridItemRoot;
+    private final Bundle sortedBy;
 
-    public MoviesGridviewAdapter(Context context, int resource, ArrayList<Movie> movies, GridView gridView, FrameLayout gridItemRoot) {
+    public MoviesGridviewAdapter(Context context, int resource, ArrayList<Movie> movies, GridView gridView, FrameLayout gridItemRoot, Bundle sortedBy) {
         super(context, resource, movies);
         this.movieGridView = gridView;
         this.gridItemRoot = gridItemRoot;
+        this.sortedBy = sortedBy;
     }
 
     @SuppressLint("SetTextI18n")
@@ -69,8 +72,10 @@ public class MoviesGridviewAdapter extends ArrayAdapter<Movie> {
         TextView sortInfoTextView = viewHolder.sortInfo;
         ImageView sortIconImageView = viewHolder.sortIcon;
 
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String sortOptionSelected = sharedPreferences.getString(getContext().getString(R.string.shared_pref_sort_key), getContext().getString(R.string.sort_by_popularity));
+        String sortOptionSelected = getContext().getString(R.string.sort_by_popularity);
+        if(sortedBy != null) {
+            sortOptionSelected = sortedBy.getString(getContext().getString(R.string.shared_pref_sort_key));
+        }
         if (sortOptionSelected.equals(getContext().getString(R.string.sort_by_popularity))) {
             sortInfoTextView.setText("" + currentMovie.getPopularityInt());
             sortIconImageView.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_local_activity_black_24dp));

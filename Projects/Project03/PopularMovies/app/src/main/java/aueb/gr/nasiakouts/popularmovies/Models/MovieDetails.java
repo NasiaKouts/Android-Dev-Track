@@ -48,6 +48,11 @@ public class MovieDetails {
     @SerializedName("vote_average")
     private double avgVote;
 
+    private VideosInfo[] trailers;
+
+    private Reviews[] reviews;
+
+
     public long getId() {
         return id;
     }
@@ -175,7 +180,7 @@ public class MovieDetails {
     }
 
     public String getMoreLanguagesFullString() {
-        if (spokenLanguages == null || spokenLanguages.length == 0) return "";
+        if (spokenLanguages == null || spokenLanguages.length == 0) return originalLanguage;
         StringBuilder moreLanguages = new StringBuilder("");
         Boolean notFirst = false;
         for (SpokenLanguage language : spokenLanguages) {
@@ -216,5 +221,21 @@ public class MovieDetails {
 
     public String getCollectionInfo() {
         return collection == null ? "Standalone" : collection.getName() + " Collection";
+    }
+
+    public VideosInfo[] getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(VideosInfo[] trailers) {
+        this.trailers = trailers;
+    }
+
+    public Reviews[] getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Reviews[] reviews) {
+        this.reviews = reviews;
     }
 }

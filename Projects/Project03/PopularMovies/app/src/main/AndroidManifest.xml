@@ -27,13 +27,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity" />
         </activity>
-        <activity android:name=".Activities.InfoActivity"
-            android:parentActivityName=".Activities.MainActivity"
-            android:theme="@style/InfoTheme">
+        <activity
+            android:name=".Activities.InfoActivity"
+            android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity" />
         </activity>
+        
+        <provider
+            android:authorities="@string/content_provider_authority"
+            android:name=".Data.FavoriteMovieProvider"
+            android:exported="false" />
     </application>
 
 </manifest>

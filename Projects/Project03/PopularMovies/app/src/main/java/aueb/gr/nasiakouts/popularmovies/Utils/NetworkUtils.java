@@ -16,9 +16,14 @@ import java.util.Scanner;
  */
 public class NetworkUtils {
 
+    /*
+        TMDB API
+     */
     private final static String BASE_URL = "https://api.themoviedb.org/3/movie/";
     private final static String KEY_PARAM = "api_key";
-    private final static String KEY_VALUE = "insert_your_key_here";
+    private final static String VIDEOS = "videos";
+    private final static String REVIEWS = "reviews";
+    private final static String KEY_VALUE = "yourkey";
 
     /*
         Build the Url getting the popular or top rated movies,
@@ -55,6 +60,90 @@ public class NetworkUtils {
             Log.e("Malformed URL exception", e.getMessage());
         }
         return url;
+    }
+
+    /*
+        Build the Url getting the trailers of the movie with the given id.
+     */
+    public static URL buildGetVideosUrl(String movieId){
+        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(VIDEOS)
+                .appendQueryParameter(KEY_PARAM, KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            Log.e("Malformed URL exception", e.getMessage());
+        }
+        return url;
+    }
+
+    /*
+        Build the Url getting the reviews of the movie with the given id.
+    */
+    public static URL buildGetReviewsUrl(String movieId){
+        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
+                .appendPath(movieId)
+                .appendPath(REVIEWS)
+                .appendQueryParameter(KEY_PARAM, KEY_VALUE)
+                .build();
+
+        URL url = null;
+        try {
+            url = new URL(builtUri.toString());
+        } catch (MalformedURLException e) {
+            Log.e("Malformed URL exception", e.getMessage());
+        }
+        return url;
+    }
+
+
+    /*
+    YOUTUBE
+    e.g.    https://www.youtube.com/watch?v=SUXWAEX2jlg - play video
+            https://img.youtube.com/vi/SUXWAEX2jlg/mqdefault.jpg - get thumbnail
+    */
+    private final static String HTTPS = "https://";
+    private final static String VIDEO_REQUEST_PRE = "www.";
+    private final static String THUMBNAIL_REQUEST_PRE = "img.";
+    private final static String YT_BASE_URL = "youtube.com";
+    private final static String YT_VIDEO_PATH = "watch";
+    private final static String YT_THUMBNAIL_PATH = "vi";
+    private final static String YT_VIDEO_KEY_PARAM = "v";
+    private final static String YT_THUMBNAIL = "mqdefault.jpg";
+    private final static String YT_APP_INTENT = "vnd.youtube:";
+
+    /*
+        Build the Url of the movie's trailer to be played by browser
+    */
+    public static Uri buildYoutubeVideoUri(String trailerKey){
+        return Uri.parse(HTTPS + VIDEO_REQUEST_PRE + YT_BASE_URL).buildUpon()
+                .appendPath(YT_VIDEO_PATH)
+                .appendQueryParameter(YT_VIDEO_KEY_PARAM, trailerKey)
+                .build();
+    }
+
+    /*
+        Build the Url of the movie's trailer to be played by youtube app
+    */
+    public static Uri buildYoutubeVideoAppUri(String trailerKey){
+        return Uri.parse(YT_APP_INTENT + trailerKey).buildUpon().build();
+    }
+
+    /*
+        Build the "Url" getting the youtube thumbnails of trailers.
+    */
+    public static String buildYoutubeThumbnailUrl(String trailerKey){
+        Uri builtUri = Uri.parse(HTTPS + THUMBNAIL_REQUEST_PRE + YT_BASE_URL).buildUpon()
+                .appendPath(YT_THUMBNAIL_PATH)
+                .appendPath(trailerKey)
+                .appendPath(YT_THUMBNAIL)
+                .build();
+
+        return "" + builtUri.toString();
     }
 
     /*

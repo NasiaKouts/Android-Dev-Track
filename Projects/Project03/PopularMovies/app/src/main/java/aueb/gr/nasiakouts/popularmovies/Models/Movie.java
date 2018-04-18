@@ -23,10 +23,12 @@ public class Movie {
     @SerializedName("release_date")
     private String releaseDate;
 
-    public Movie(int id, String title, String posterPath) {
-        this.id = id;
+    public Movie(String id, String title, String posterPath, String popularity, String releaseDate) {
+        this.id = Integer.parseInt(id);
         this.title = title;
         this.posterPath = BASE_URL + SIZE + posterPath;
+        this.popularity = Double.parseDouble(popularity);
+        this.releaseDate = releaseDate;
     }
 
     public String getId() {
